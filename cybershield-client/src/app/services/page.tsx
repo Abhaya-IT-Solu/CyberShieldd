@@ -2,6 +2,8 @@
 import { ReactLenis } from 'lenis/react';
 import { useTransform, motion, useScroll, MotionValue } from 'motion/react';
 import { useRef } from 'react';
+// import { ReactNode } from "react";
+
 import Image from 'next/image';
 const projects = [
   {
@@ -70,7 +72,7 @@ const projects = [
     color: '#fd521a',
   }, */
 ];
-export default function About(): JSX.Element {
+export default function About(){
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
