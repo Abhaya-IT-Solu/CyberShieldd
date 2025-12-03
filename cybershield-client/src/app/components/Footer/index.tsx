@@ -38,8 +38,8 @@ export default function Footer() {
 
   const socialLinks = [
     { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/yourhandle' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/cybershield' },
-    { name: 'GitHub', icon: Github, href: 'https://github.com/yourorg' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/cyber-shieldd/' },
+    { name: 'GitHub', icon: Github, href: 'https://github.com/Cyber-Shieldd/' },
   ];
 
   return (
@@ -64,7 +64,7 @@ export default function Footer() {
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0" />
                 <a href="mailto:support@cybershield.com" className="hover:text-cyan-400 transition-colors">
-                  support@cybershield.com
+                  support@cybershieldd.online
                 </a>
               </div>
               <div className="flex items-center gap-3 text-sm">
