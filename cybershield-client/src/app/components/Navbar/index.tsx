@@ -5,6 +5,7 @@ import { Drawer } from "vaul";
 import { AlignJustify, X } from "lucide-react";
 import { useMediaQuery } from "../../hooks/use-media-query";
 import clsx from "clsx";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +16,17 @@ export default function Navbar() {
       className={clsx(
         "flex gap-2 z-50 text-neutral-900 m-0",
         "sm:backdrop-blur-lg sm:border border-gray-200/80 ",
-        "top-2 rounded-lg w-[100%] max-w-7xl  items-center justify-between mx-auto px-20 p-2 sticky"
+        "top-2 rounded-lg w-[100%] max-w-7xl  items-center justify-between mx-auto px-4 p-2 sticky"
       )}
     >
       {!isMobile ? (
         <>
-          <h1 className="text-xl uppercase font-bold">LOGO</h1>
+          <Image
+            src={"/logos"}
+            alt="logo"
+            width={50}
+            height={50}
+          />
 
           <nav className="flex gap-7 font-medium">
             <a href="/">Home</a>
@@ -66,10 +72,10 @@ export default function Navbar() {
 
                 <div className="rounded-b-md py-2 px-3">
                   <ul className="space-y-2">
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Features</li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Pricing</li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Solutions</li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Resources</li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Home</li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Services</li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">About</li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Testimonials</li>
                     <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Blog</li>
                   </ul>
                 </div>

@@ -179,7 +179,7 @@ export default function AboutSection() {
           <a href="/services">Explore Our Services</a> <ArrowRight className="" />
         </TimelineContent>
       </div>
-      <div className="max-w-6xl mx-auto grid grid-cols-4 gap-4 pt-20 lg:h-[26rem] md:h-[22rem] sm:h-[16rem] h-[14rem]">
+      <div className="flex max-w-6xl mx-auto grid grid-cols-4 gap-4 pt-20 lg:h-[26rem] md:h-[22rem] sm:h-[16rem] h-[14rem]">
         {/* Top Left Image */}
         <TimelineContent
           as="figure"

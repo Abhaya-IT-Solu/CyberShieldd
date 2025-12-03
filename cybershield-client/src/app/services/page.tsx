@@ -94,7 +94,7 @@ export default function About(){
           </section>
         </>
 
-        <section className='text-white   w-full bg-slate-950  '>
+        <section className='text-white w-full bg-slate-950  '>
           {projects.map((project, i) => {
             const targetScale = 1 - (projects.length - i) * 0.05;
             return (
@@ -159,12 +159,12 @@ export const Card: React.FC<CardProps> = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`flex flex-col relative -top-[25%] h-[450px] w-[70%] rounded-md lg:p-10 sm:p-4 p-2 origin-top`}
+        className={`flex flex-col relative -top-[25%] h-[450px] w-[70%] rounded-md lg:p-10 sm:p-4 p-2 origin-top overflow-hidden`}
       >
         <h2 className='text-2xl text-center font-semibold'>{title}</h2>
         <div className={`flex h-full mt-5 gap-10`}>
-          <div className={`w-[40%] relative top-[10%]`}>
-            <p className='text-sm'>{description}</p>
+          <div className={`w-[40%] relative top-[10%] overflow-hidden`}>
+            <p className='text-sm overflow-hidden'>{description}</p>
             <span className='flex items-center gap-2 pt-2'>
               <a
                 href={'#'}

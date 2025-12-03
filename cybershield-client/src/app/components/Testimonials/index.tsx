@@ -40,26 +40,25 @@ function ClientFeedback() {
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:50px_56px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
               <figure>
                 <Image
-                  src={"/logos/Logo-1.svg"}
+                  src={"/logos/mock_bg2.png"}
                   alt="logo"
-                  width={200}
+                  width={600}
                   height={200}
                 />
               </figure>
               <article className="mt-auto">
                 <p>
-                  "Hypersphere has been a game-changer for us. Their service is
-                  top-notch and their team is incredibly responsive."
+                  "Your team has been extremely reliable and responsive. The Help Desk support provided for AAI Online Service has improved our workflow and reduced issue-resolution time significantly. We appreciate the professionalism and timely assistance"
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
                     <h2 className=" font-semibold lg:text-xl text-sm">
-                      Guillermo Rauch
+                      Owner
                     </h2>
-                    <p className="">CEO of Enigma</p>
+                    <p className="">AAI Online Service</p>
                   </div>
                   <Image
-                    src="/people/am1.jpg"
+                    src="/people/image.png"
                     alt="logo"
                     width={200}
                     height={200}
@@ -71,16 +70,15 @@ function ClientFeedback() {
             <TimelineContent animationNum={1} customVariants={revealVariants} timelineRef={testimonialRef} className="lg:flex-[3] flex-[4] lg:h-fit  lg:shrink-0 flex flex-col justify-between relative bg-blue-600 text-white overflow-hidden rounded-lg border border-gray-200 p-5">
               <article className="mt-auto">
                 <p>
-                  "We've seen incredible results with Hypersphere. Their
-                  expertise, dedication."
+                  "The technical support team showed great expertise and quick problem-solving. Their ability to resolve critical issues within minutes has helped our operations run smoothly. Excellent service!"
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
-                    <h2 className=" font-semibold text-xl">Rika Shinoda</h2>
-                    <p className="">CEO of Kintsugi</p>
+                    <h2 className=" font-semibold text-xl">Atish</h2>
+                    {/* <p className="">CEO of Kintsugi</p> */}
                   </div>
                   <Image
-                    src="/people/am3.jpg"
+                    src="/people/image.png"
                     alt="logo"
                     width={200}
                     height={200}
@@ -94,18 +92,17 @@ function ClientFeedback() {
             <TimelineContent animationNum={2} customVariants={revealVariants} timelineRef={testimonialRef} className="flex flex-col justify-between relative bg-[#111111] text-white overflow-hidden rounded-lg border border-gray-200 p-5">
               <article className="mt-auto">
                 <p className="2xl:text-base text-sm">
-                  "Their team is highly professional, and their innovative
-                  solutions have truly transformed the way we operate."
+                  "My laptop kept crashing while editing projects. The remote troubleshooting fixed it in under two hours. Saved my entire deadline."
                 </p>
                 <div className="flex justify-between items-end pt-5">
                   <div>
                     <h2 className=" font-semibold lg:text-xl text-lg">
-                      Reacher{" "}
+                      Rohit Deshmukh{" "}
                     </h2>
-                    <p className="lg:text-base text-sm">CEO of OdeaoLabs</p>
+                    <p className="lg:text-base text-sm">Freelance Graphic Designer</p>
                   </div>
                   <Image
-                    src="/people/aam4.jpg"
+                    src="/people/p1_M.png"
                     alt="logo"
                     width={200}
                     height={200}
@@ -117,16 +114,15 @@ function ClientFeedback() {
             <TimelineContent animationNum={3} customVariants={revealVariants} timelineRef={testimonialRef} className="flex flex-col justify-between relative bg-[#111111] text-white overflow-hidden rounded-lg border border-gray-200 p-5">
               <article className="mt-auto">
                 <p className="2xl:text-base text-sm">
-                  "We're extremely satisfied with Hypersphere. Their expertise
-                  and dedication have exceeded our expectations."
+                  "I had a malware issue slowing down everything. The cleanup guidance solved it quickly."
                 </p>
                 <div className="flex justify-between items-end pt-5">
                   <div>
-                    <h2 className=" font-semibold lg:text-xl text-lg">John </h2>
-                    <p className="lg:text-base text-sm">CEO of Labsbo</p>
+                    <h2 className=" font-semibold lg:text-xl text-lg">Aparna Iyer</h2>
+                    <p className="lg:text-base text-sm">BCA Student</p>
                   </div>
                   <Image
-                    src="/people/am2.jpg"
+                    src="/people/image.png"
                     alt="logo"
                     width={200}
                     height={200}
@@ -144,12 +140,12 @@ function ClientFeedback() {
                 <div className="flex justify-between items-end pt-5">
                   <div>
                     <h2 className=" font-semibold lg:text-xl text-lg">
-                      Steven Sunny
+                      Shalini Nambiar
                     </h2>
-                    <p className="lg:text-base text-sm">CEO of boxefi</p>
+                    <p className="lg:text-base text-sm">E-commerce Store Owner</p>
                   </div>
                   <Image
-                    src="/people/aam3.jpg"
+                    src="/people/image.png"
                     alt="logo"
                     width={200}
                     height={200}
@@ -163,15 +159,15 @@ function ClientFeedback() {
             <TimelineContent animationNum={5} customVariants={revealVariants} timelineRef={testimonialRef} className=" lg:flex-[3] flex-[4] flex flex-col justify-between relative bg-blue-600 text-white overflow-hidden rounded-lg border border-gray-200 p-5">
               <article className="mt-auto">
                 <p>
-                  "Hypersphere has been a key partner in our growth journey."
+                  "The pen-testing demo revealed vulnerabilities we didn’t know existed. The consultation after was extremely useful"
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
-                    <h2 className=" font-semibold text-xl">Guillermo Rauch</h2>
-                    <p className="">CEO of OdeaoLabs</p>
+                    <h2 className=" font-semibold text-xl">Harshvardhan Singh</h2>
+                    <p className="">Startup Founder</p>
                   </div>
                   <Image
-                    src="/people/aam1.png"
+                    src="/people/p2_M.png"
                     alt="logo"
                     width={200}
                     height={200}
@@ -184,26 +180,23 @@ function ClientFeedback() {
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:50px_56px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
               <figure>
                 <Image
-                  src={"/logos/Logo-5.svg"}
+                  src={"/logos/mock_bg1.png"}
                   alt="logo"
-                  width={200}
-                  height={200}
+                  width={450}
+                  height={450}
                 />
               </figure>
               <article className="mt-auto">
                 <p>
-                  "Hypersphere has been a true game-changer for us. Their
-                  exceptional service, combined with their deep expertise and
-                  commitment to excellence, has made a significant impact on our
-                  business."
+                  "They built our entire website from scratch with a clean UI and a fast backend. The dashboard works exactly the way we wanted, and the loading speed improved drastically."
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
-                    <h2 className=" font-semibold text-xl">Paul Brauch</h2>
-                    <p className="">CTO of Spectrum</p>
+                    <h2 className=" font-semibold text-xl"></h2>
+                    <p className="">Founder</p>
                   </div>
                   <Image
-                    src="/people/in1.jpg"
+                    src="/people/image.png"
                     alt="logo"
                     width={200}
                     height={200}
