@@ -14,11 +14,11 @@ export default function Footer() {
   ];
 
   const company = [
-    { name: 'About Us', href: '/about' },
+    { name: 'About Us', href: '/#about' },
     { name: 'Blog & Guides', href: '/blog' },
-    { name: 'Testimonials', href: '/testimonials' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Testimonials', href: '/#testimonials' },
+    { name: 'Careers', href: '/#careers' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   const resources = [
