@@ -15,17 +15,17 @@ export default function Navbar() {
     <header
       className={clsx(
         "flex gap-2 z-50 text-neutral-900 m-0",
-        "sm:backdrop-blur-lg sm:border border-gray-200/80 ",
+        "bg-white sm:backdrop-blur-lg sm:border border-gray-200/80 ",
         "top-2 rounded-lg w-[100%] max-w-7xl  items-center justify-between mx-auto px-4 p-2 sticky"
       )}
     >
       {!isMobile ? (
         <>
           <Image
-            src={"/logos"}
+            src={"/brand/logo.png"}
             alt="logo"
-            width={50}
-            height={50}
+            width={70}
+            height={70}
           />
 
           <nav className="flex gap-7 font-medium">
@@ -37,7 +37,7 @@ export default function Navbar() {
           </nav>
 
           <button className="text-lg h-10 px-4 rounded-lg text-white flex items-center gap-2 bg-neutral-800 relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-gradient-to-t before:from-neutral-800 before:to-neutral-300 before:rounded-t-lg transition-all group">
-            Log In
+           <a href="/#contact">Contact</a> 
           </button>
         </>
       ) : (
@@ -59,7 +59,12 @@ export default function Navbar() {
               <div className="bg-gradient-to-t from-black via-neutral-800 to-neutral-950 border border-neutral-400 text-white p-2 h-full w-full grow flex flex-col rounded-[16px]">
                 <div className="w-full flex justify-between">
                   <div className="flex gap-2 px-4 flex-shrink-0 items-center text-2xl font-semibold">
-                    <span>LOGO</span>
+                    <Image
+                      src={"/brand/logo.png"}
+                      alt="logo"
+                      width={70}
+                      height={70}
+                    />
                   </div>
 
                   <button
