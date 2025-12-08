@@ -122,7 +122,7 @@ function ClientFeedback() {
                     <p className="lg:text-base text-sm">BCA Student</p>
                   </div>
                   <Image
-                    src="/people/default.png"
+                    src="/people/p3_F.png"
                     alt="logo"
                     width={200}
                     height={200}
