@@ -30,10 +30,10 @@ export default function Navbar() {
 
           <nav className="flex gap-7 font-medium">
             <a href="/">Home</a>
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="/blog">Blog</a>
+            <a href="/#services">Services</a>
+            <a href="/#about">About</a>
+            <a href="/#testimonials">Testimonials</a>
+            <a href="/careers">Careers</a>
           </nav>
 
           <button className="text-lg h-10 px-4 rounded-lg text-white flex items-center gap-2 bg-neutral-800 relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-gradient-to-t before:from-neutral-800 before:to-neutral-300 before:rounded-t-lg transition-all group">
@@ -77,11 +77,11 @@ export default function Navbar() {
 
                 <div className="rounded-b-md py-2 px-3">
                   <ul className="space-y-2">
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Home</li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Services</li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">About</li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Testimonials</li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md">Blog</li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/">Home</a></li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/#services">Services</a></li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/#about">About</a></li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/#testimonials">Testimonials</a></li>
+                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/careers">Careers</a></li>
                   </ul>
                 </div>
               </div>

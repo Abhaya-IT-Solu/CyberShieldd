@@ -149,8 +149,8 @@ export default function AboutSection() {
             Title="Founder"
             imageurl={Founder.src}
           > 
-            <div className="flex align-start">
-             <ul className="space-y-3 mb-6 m-4">
+            <div className="flex align-start overflow-hidden">
+             <ul className="space-y-3 mb-6 m-4 overflow-hidden">
                 {founder.map((skill, index) => (
                   <li key={index} className="text-sm text-gray-900">
                     {skill}
