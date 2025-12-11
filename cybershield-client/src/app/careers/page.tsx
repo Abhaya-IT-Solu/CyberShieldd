@@ -43,7 +43,7 @@ const JobsListing = () => {
         'Write clean, maintainable code',
         'Participate in code reviews and mentor junior developers'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
       id: 2,
@@ -65,7 +65,7 @@ const JobsListing = () => {
         'Document support tickets and solutions',
         'Maintain IT infrastructure'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
       id: 3,
@@ -87,7 +87,7 @@ const JobsListing = () => {
         'Monitor system performance and reliability',
         'Automate operational processes'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
       id: 7,
@@ -109,7 +109,7 @@ const JobsListing = () => {
         'Participate in team meetings and code reviews',
         'Learn industry best practices and development workflows'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
       id: 4,
@@ -131,7 +131,7 @@ const JobsListing = () => {
         'Implement security best practices',
         'Develop security policies and procedures'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
       id: 5,
@@ -153,7 +153,7 @@ const JobsListing = () => {
         'Conduct user research and testing',
         'Collaborate with developers and stakeholders'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
       id: 6,
@@ -175,7 +175,7 @@ const JobsListing = () => {
         'Coordinate with internal teams and clients',
         'Track project progress and report to stakeholders'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
     id: 8,
@@ -197,7 +197,7 @@ const JobsListing = () => {
       'Collaborate with developers to implement designs',
       'Contribute to the company design system and style guides'
     ],
-    applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+    applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     },
     {
       id: 9,
@@ -219,7 +219,7 @@ const JobsListing = () => {
         'Prepare reports and presentations for leadership',
         'Coordinate cross-functional projects and track key metrics'
       ],
-      applyLink: 'https://forms.gle/CHEGvu57HBDyCmkv7'
+      applyLink: 'https://docs.google.com/forms/d/1FKdFGLCmGqihsw6epa97onhwnVM1Say4vLLCcqSk1q0/edit'
     }
   ];
 
