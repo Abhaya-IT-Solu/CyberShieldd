@@ -92,12 +92,12 @@ function ClientFeedback() {
             <TimelineContent animationNum={2} customVariants={revealVariants} timelineRef={testimonialRef} className="flex flex-col justify-between relative bg-[#111111] text-white overflow-hidden rounded-lg border border-gray-200 p-5">
               <article className="mt-auto">
                 <p className="2xl:text-base text-sm">
-                  "My laptop kept crashing while editing projects. The remote troubleshooting fixed it in under two hours. Saved my entire deadline."
+                  "My laptop kept crashing while  projects. The remote troubleshooting fixed it in under one hours. Saved my entire time and work."
                 </p>
                 <div className="flex justify-between items-end pt-5">
                   <div>
                     <h2 className=" font-semibold lg:text-xl text-lg">
-                      Rohit Deshmukh{" "}
+                      Avishkar Chavhan{" "}
                     </h2>
                     <p className="lg:text-base text-sm">Freelance Graphic Designer</p>
                   </div>
