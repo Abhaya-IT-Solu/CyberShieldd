@@ -7,51 +7,59 @@ import { useRef } from 'react';
 import Image from 'next/image';
 const projects = [
   {
+    title: 'Web Services and Support',
+    description:
+      'We provide end-to-end web development services, including corporate websites, e-commerce platforms, landing pages, portfolios, custom web applications, PWAs, SaaS products, and enterprise-grade solutions. Beyond development, we ensure long-term success through ongoing maintenance, security monitoring, performance optimization, and dedicated technical support. Our focus is on building scalable, secure, and high-performing digital products that support real business growth across all devices.',
+    src: 'rock.jpg',
+    link: 'https://images.unsplash.com/photo-1613068687893-5e85b4638b56?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdlYiUyMGRlc2lnbnxlbnwwfHwwfHx8MA%3D%3D',
+    color: '#5196fd',
+  },
+  {
     title: 'Basic IT Help Desk',
     description:
       'Software troubleshooting, virus scans, malware removal, application crashes, installation errors, operating system issues, email client support, data recovery guidance, password resets, and basic fixes delivered remotely within 2-4 hours.',
     src: 'rock.jpg',
-    link: 'https://images.unsplash.com/photo-1605106702842-01a887a31122?q=80&w=500&auto=format&fit=crop',
+    link: 'https://plus.unsplash.com/premium_vector-1682303140641-796513c12f7d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aXQlMjBzdXBwb3J0fGVufDB8fDB8fHww',
     color: '#5196fd',
   },
   {
-    title: ' Computer Hardware Diagnostics',
+    title: 'Computer Hardware Diagnostics',
     description:
       'RAM testing, overheating solutions with thermal monitoring, hard drive health checks, battery troubleshooting, BIOS optimization, peripheral fixes, CPU stress testing, GPU benchmarking, and upgrade recommendations for peak performance.',
     src: 'tree.jpg',
-    link: 'https://images.unsplash.com/photo-1605106250963-ffda6d2a4b32?w=500&auto=format&fit=crop&q=60',
+    link: 'https://plus.unsplash.com/premium_vector-1682304648569-4bc879205512?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aXQlMjBzdXBwb3J0fGVufDB8fDB8fHww',
     color: '#8f89ff',
   },
   {
-    title: ' Software Installation',
+    title: 'Software Installation',
     description:
       'Linux distribution installs with dual-boot, Windows setups, Java and Python configuration, IDE setup for VS Code and IntelliJ, Git and GitHub integration, database installations, antivirus deployment, and VPN configuration.',
     src: 'water.jpg',
-    link: 'https://images.unsplash.com/photo-1605106901227-991bd663255c?w=500&auto=format&fit=crop',
+    link: 'https://plus.unsplash.com/premium_vector-1734027997317-854a5f2c7b72?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8U29mdHdhcmUlMjBJbnN0YWxsYXRpb258ZW58MHx8MHx8fDA%3D',
     color: '#13006c',
   },
   {
-    title: ' Basic Networking Assistance',
+    title: 'Basic Networking Assistance',
     description:
       'Wi-Fi router setup and optimization, IP configuration, subnet planning, connection troubleshooting, router security with WPA3 encryption, mesh network planning, file sharing across devices, guest network isolation, and port forwarding.',
     src: 'house.jpg',
-    link: 'https://images.unsplash.com/photo-1605106715994-18d3fecffb98?w=500&auto=format&fit=crop&q=60',
+    link: 'https://plus.unsplash.com/premium_vector-1745324167720-ffec87f0e7f9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8QmFzaWMlMjBOZXR3b3JraW5nJTIwQXNzaXN0YW5jZXxlbnwwfHwwfHx8MA%3D%3D',
     color: '#ed649e',
   },
   {
-    title: ' Introductory Pen Testing Demo',
+    title: 'Introductory Pen Testing Demo',
     description:
       'Free automated vulnerability scan focusing on OWASP Top 10 threats including SQL injection and XSS, color-coded risk findings, actionable remediation suggestions, security score rating, and 30-minute follow-up consultation.',
     src: 'cactus.jpg',
-    link: 'https://images.unsplash.com/photo-1506792006437-256b665541e2?w=500&auto=format&fit=crop',
-    color: '#fd521a',
+    link: 'https://plus.unsplash.com/premium_vector-1682298597294-6237d53fecc0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8SW5qZWN0aW9uJTIwVGVzdGluZ3xlbnwwfHwwfHx8MA%3D%3D',
+    color: '#52a5bcff',
   },
   {
-    title: ' Simple Website Security Check',
+    title: 'Simple Website Security Check',
     description:
       'SSL/TLS validation, HTTPS enforcement, security header assessment, CMS security review for WordPress and Joomla, outdated plugin detection, client-side vulnerability scanning, malware injection detection, and web dev support.',
     src: 'cactus.jpg',
-    link: 'https://images.unsplash.com/photo-1506792006437-256b665541e2?w=500&auto=format&fit=crop',
+    link: 'https://plus.unsplash.com/premium_vector-1725881519668-4b26c5072659?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFdlYnNpdGUlMjBTZWN1cml0eSUyMENoZWNrfGVufDB8fDB8fHww',
     color: '#fd521a',
   },
   /*
@@ -167,7 +175,7 @@ export const Card: React.FC<CardProps> = ({
             <p className='text-sm overflow-hidden'>{description}</p>
             <span className='flex items-center gap-2 pt-2'>
               <a
-                href={'#'}
+                href={'/services/webservices'}
                 target='_blank'
                 className='underline cursor-pointer'
               >
