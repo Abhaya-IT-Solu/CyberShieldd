@@ -4,6 +4,13 @@ import ServicesSection from "./components/Services/index"
 import AboutSection from "./components/About/index"
 import ClientFeedback from "./components/Testimonials/index"
 import ContactForm from "./components/Contact/index"
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Abhaya IT Solutions",
+  description:
+    "Abhaya IT Solutions provides cybersecurity and IT services including network security, cloud protection, and threat monitoring for businesses.",
+};
 
 
 export default function Home() {
