@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://cybershieldd.online/sitemap.xml",
+    sitemap: "https://abhayaitsolutions.online/sitemap.xml",
   };
 }
+
