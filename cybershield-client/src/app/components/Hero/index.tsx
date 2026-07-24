@@ -1,142 +1,64 @@
-"use client";
+import Link from "next/link";
+import { brand } from "@/config/brand";
 
-import { ProgressiveBlur } from "../ui/progressive-blur";
-import { TimelineContent } from "../ui/timeline-animations";
-import { Sparkles } from "lucide-react";
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
+const HERO_VIDEO =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
-function OrganizationHero() {
-  const router = useRouter();
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  const revealVariants = {
-    visible: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      filter: "blur(0px)",
-      transition: {
-        delay: i * 0.4,
-        duration: 0.5,
-      },
-    }),
-    hidden: {
-      filter: "blur(10px)",
-      y: -20,
-      opacity: 0,
-    },
-  };
-
-  const scaleVariants = {
-    visible: (i: number) => ({
-      scale: 1,
-      opacity: 1,
-      filter: "blur(0px)",
-      transition: {
-        delay: i * 0.4,
-        duration: 0.5,
-      },
-    }),
-    hidden: {
-      filter: "blur(10px)",
-      scale: 0.8,
-      opacity: 0,
-    },
-  };
-
+export default function OrganizationHero() {
   return (
-    <section ref={heroRef} className="min-h-screen relative pb-10">
-      {/* Background */}
-      <TimelineContent
-        animationNum={11}
-        timelineRef={heroRef}
-        customVariants={revealVariants}
-        className="absolute inset-0 bg-[url('/shadow13.png')] bg-cover bg-center bg-no-repeat"
-      />
-
-      {/* Hero Content */}
-      <TimelineContent
-        as="article"
-        animationNum={1}
-        timelineRef={heroRef}
-        customVariants={revealVariants}
-        className="text-neutral-800 py-32 w-fit max-w-5xl mx-auto text-center space-y-4 relative z-10 lg:px-0 px-4"
+    <section className="relative min-h-screen w-full overflow-hidden flex flex-col">
+      {/* Fullscreen looping background video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
       >
-        <TimelineContent
-          animationNum={2}
-          timelineRef={heroRef}
-          customVariants={revealVariants}
-          className="flex gap-2 items-center mb-4 bg-black text-white w-fit mx-auto py-1 px-1.5 sm:text-sm text-xs rounded-md cursor-pointer"
-        >
-          <span className="bg-blue-500 px-1 rounded-sm">NEW</span> Secure/Build your
-          website with AbhayaITSolutions
-        </TimelineContent>
+        <source src={HERO_VIDEO} type="video/mp4" />
+      </video>
 
-        <TimelineContent
-          as="h1"
-          animationNum={3}
-          timelineRef={heroRef}
-          customVariants={scaleVariants}
-          className="2xl:text-6xl sm:text-5xl text-4xl font-semibold text-gray-900 mb-6 capitalize"
-        >
-          Affordable Cybersecurity & IT Help & services for
-          <br />
-          <span className="pt-3 inline-block 2xl:text-8xl sm:text-7xl text-5xl">
-            <TimelineContent
-              as="span"
-              animationNum={4}
-              timelineRef={heroRef}
-              customVariants={scaleVariants}
-              className="text-blue-500 text-shadow capitalize bg-blue-500/20 backdrop-blur-md rounded-xl border-2 border-blue-300 px-2 inline-block m-3"
-            >
-              Students
-            </TimelineContent>
-            <span className="bg-gradient-to-b from-black to-black/40 bg-clip-text text-transparent">
-              and Small{" "}
-            </span>
-            <TimelineContent
-              as="span"
-              animationNum={4}
-              timelineRef={heroRef}
-              customVariants={scaleVariants}
-              className="text-blue-500 text-shadow capitalize bg-blue-500/20 backdrop-blur-md rounded-xl border-2 border-blue-300 px-2 inline-block"
-            >
-              Businesses
-            </TimelineContent>
-          </span>
-        </TimelineContent>
+      {/* Legibility scrim — kept minimal so the video carries the depth */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-background/40 via-background/10 to-background/70" />
 
-        <TimelineContent
-          as="p"
-          animationNum={5}
-          timelineRef={heroRef}
-          customVariants={revealVariants}
-          className="2xl:max-w-3xl max-w-2xl mx-auto 2xl:text-lg sm:text-base text-sm"
-        >
-          Rapid fixes, deep expertise. We serves students, entrepreneurs,
-          and organizations with tailored cybersecurity and IT solutions.
-        </TimelineContent>
+      {/* Hero content */}
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center px-6 pt-32 pb-40">
+        <span className="animate-fade-rise liquid-glass rounded-full px-4 py-1.5 text-xs sm:text-sm text-white/90 mb-8">
+          Enterprise-grade cybersecurity &amp; software engineering
+        </span>
 
-        <TimelineContent
-          as="div"
-          animationNum={6}
-          timelineRef={heroRef}
-          customVariants={scaleVariants}
-          className="flex gap-2 mt-5 mx-auto w-fit"
+        <h1
+          className="font-display animate-fade-rise text-5xl sm:text-7xl md:text-8xl leading-[0.95] tracking-[-2.46px] max-w-6xl font-normal text-white"
         >
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="text-white bg-gradient-to-t from-blue-500 to-blue-400 shadow-md shadow-blue-500 border border-blue-500 px-4 py-2 rounded-lg flex items-center gap-2" onClick={() =>  router.push("#contact")}>
-              <Sparkles size={20} />
-              Get started
-            </button>
-            <button className="bg-neutral-100 border border-neutral-200 text-black p-2 rounded-lg flex items-center gap-2 shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_10px_10px_-5px_rgba(0,0,0,0.04)]">
-              <a href="/services">Explore Services</a>
-            </button>
-          </div>
-        </TimelineContent>
-      </TimelineContent>
+          Security and software that{" "}
+          <em className="not-italic text-white/55">
+            move enterprises forward.
+          </em>
+        </h1>
+
+        <p className="animate-fade-rise-delay text-white/60 text-base sm:text-lg max-w-2xl mt-8 leading-relaxed">
+          {brand.name} partners with ambitious organizations to secure critical
+          systems and ship resilient software — engineered for scale, hardened
+          for threat, and built for trust.
+        </p>
+
+        <div className="animate-fade-rise-delay-2 mt-12 flex flex-col sm:flex-row items-center gap-4">
+          <Link
+            href="/contact"
+            className="liquid-glass rounded-full px-14 py-5 text-base text-white hover:scale-[1.03] transition-transform cursor-pointer"
+          >
+            Begin a conversation
+          </Link>
+          <Link
+            href="/portfolio"
+            className="rounded-full px-14 py-5 text-base text-white/70 hover:text-white transition-colors cursor-pointer"
+          >
+            View our work
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }
-
-export default OrganizationHero;

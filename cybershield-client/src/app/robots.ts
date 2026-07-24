@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { brand } from "@/config/brand";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,9 +7,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        disallow: ["/pricing", "/blog"],
       },
     ],
-    sitemap: "https://abhayaitsolutions.online/sitemap.xml",
+    sitemap: `${brand.siteUrl}/sitemap.xml`,
   };
 }
 

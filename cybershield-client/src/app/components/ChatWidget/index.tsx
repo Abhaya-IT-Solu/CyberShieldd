@@ -1,18 +1,24 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MessageCircle, X, Send, Minimize2, Loader2 } from "lucide-react";
+import { X, Send, Minimize2, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import clsx from "clsx";
 import Markdown from "react-markdown";
+import { brand } from "@/config/brand";
 
-// Notification messages pool
 const PROMPT_MESSAGES = [
     "Need any assistance?",
     "How can I help you?",
     "Ask me about our services",
 ];
 
-// Message type
+const SUGGESTIONS = [
+    "What services do you offer?",
+    "Do you do penetration testing?",
+    "How does an engagement work?",
+    "I'd like to book a consultation",
+];
+
 interface Message {
     id: string;
     role: "user" | "assistant";
@@ -32,87 +38,60 @@ export default function ChatWidget() {
     const inputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    // Select random message on mount
     useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * PROMPT_MESSAGES.length);
-        setPromptMessage(PROMPT_MESSAGES[randomIndex]);
+        setPromptMessage(PROMPT_MESSAGES[Math.floor(Math.random() * PROMPT_MESSAGES.length)]);
     }, []);
 
-    // Scroll to bottom when messages change
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
-    // Handle notification prompt timing
     useEffect(() => {
         if (hasInteracted.current) return;
-
         promptTimerRef.current = setTimeout(() => {
             if (!hasInteracted.current && !isOpen) {
                 setShowPrompt(true);
-
-                dismissTimerRef.current = setTimeout(() => {
-                    setShowPrompt(false);
-                }, 3000);
+                dismissTimerRef.current = setTimeout(() => setShowPrompt(false), 4000);
             }
         }, 2500);
-
         return () => {
             if (promptTimerRef.current) clearTimeout(promptTimerRef.current);
             if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
         };
     }, [isOpen]);
 
-    // Handle chat toggle
     const handleToggleChat = useCallback(() => {
         hasInteracted.current = true;
         setShowPrompt(false);
         setIsOpen((prev) => !prev);
-
         if (promptTimerRef.current) clearTimeout(promptTimerRef.current);
         if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
     }, []);
 
-    // Focus input when chat opens
     useEffect(() => {
-        if (isOpen && inputRef.current) {
-            inputRef.current.focus();
-        }
+        if (isOpen && inputRef.current) inputRef.current.focus();
     }, [isOpen]);
 
-    // Handle escape key to close chat
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape" && isOpen) {
-                setIsOpen(false);
-            }
+            if (e.key === "Escape" && isOpen) setIsOpen(false);
         };
-
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, [isOpen]);
 
-    // Send message to API and handle streaming response
-    const sendMessage = async () => {
-        if (!input.trim() || isLoading) return;
+    // Send a message. Pass `override` to send text directly (e.g. suggestion chips).
+    const sendMessage = async (override?: string) => {
+        const text = (override ?? input).trim();
+        if (!text || isLoading) return;
 
-        const userMessage: Message = {
-            id: Date.now().toString(),
-            role: "user",
-            content: input.trim(),
-        };
-
-        // Add user message and clear input
+        const userMessage: Message = { id: Date.now().toString(), role: "user", content: text };
         setMessages((prev) => [...prev, userMessage]);
         setInput("");
         setIsLoading(true);
 
-        // Create placeholder for assistant response
         const assistantId = (Date.now() + 1).toString();
-        setMessages((prev) => [
-            ...prev,
-            { id: assistantId, role: "assistant", content: "" },
-        ]);
+        setMessages((prev) => [...prev, { id: assistantId, role: "assistant", content: "" }]);
 
         try {
             const response = await fetch("/api/chat", {
@@ -131,38 +110,26 @@ export default function ChatWidget() {
                 throw new Error(error.error || "Failed to get response");
             }
 
-            // Handle streaming response
             const reader = response.body?.getReader();
             const decoder = new TextDecoder();
-
-            if (!reader) {
-                throw new Error("No response body");
-            }
+            if (!reader) throw new Error("No response body");
 
             let accumulatedText = "";
-
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
-
                 const chunk = decoder.decode(value, { stream: true });
-                const lines = chunk.split("\n");
-
-                for (const line of lines) {
+                for (const line of chunk.split("\n")) {
                     if (line.startsWith("data: ")) {
                         const data = line.slice(6);
                         if (data === "[DONE]") continue;
-
                         try {
                             const parsed = JSON.parse(data);
                             if (parsed.text) {
                                 accumulatedText += parsed.text;
-                                // Update the assistant message with accumulated text
                                 setMessages((prev) =>
                                     prev.map((m) =>
-                                        m.id === assistantId
-                                            ? { ...m, content: accumulatedText }
-                                            : m
+                                        m.id === assistantId ? { ...m, content: accumulatedText } : m
                                     )
                                 );
                             }
@@ -174,17 +141,16 @@ export default function ChatWidget() {
             }
         } catch (error) {
             console.error("Chat error:", error);
-            // Update assistant message with error
             setMessages((prev) =>
                 prev.map((m) =>
                     m.id === assistantId
                         ? {
-                            ...m,
-                            content:
-                                error instanceof Error
-                                    ? `Sorry, I encountered an error: ${error.message}`
-                                    : "Sorry, something went wrong. Please try again.",
-                        }
+                              ...m,
+                              content:
+                                  error instanceof Error
+                                      ? `Sorry, I ran into a problem: ${error.message}`
+                                      : "Sorry, something went wrong. Please try again.",
+                          }
                         : m
                 )
             );
@@ -193,13 +159,11 @@ export default function ChatWidget() {
         }
     };
 
-    // Handle form submit
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         sendMessage();
     };
 
-    // Handle key press (Enter to send)
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -209,19 +173,15 @@ export default function ChatWidget() {
 
     return (
         <>
-            {/* Notification Prompt Bubble */}
+            {/* Notification prompt bubble */}
             <div
                 className={clsx(
-                    "fixed bottom-24 right-6 z-50",
-                    "max-w-[200px] px-4 py-3 rounded-2xl rounded-br-sm",
-                    "bg-gradient-to-br from-neutral-800 to-neutral-900",
-                    "border border-neutral-700/50",
-                    "text-white text-sm font-medium",
-                    "shadow-xl shadow-black/20",
+                    "fixed bottom-24 right-6 z-50 max-w-[210px] rounded-2xl rounded-br-sm px-4 py-3",
+                    "liquid-glass text-sm font-medium text-white/90 shadow-xl shadow-black/30",
                     "transition-all duration-300 ease-out",
                     showPrompt
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-2 pointer-events-none"
+                        ? "translate-y-0 opacity-100"
+                        : "pointer-events-none translate-y-2 opacity-0"
                 )}
                 role="status"
                 aria-live="polite"
@@ -229,55 +189,64 @@ export default function ChatWidget() {
                 {promptMessage}
             </div>
 
-            {/* Chat Container */}
+            {/* Chat panel */}
             <div
                 className={clsx(
-                    "fixed bottom-24 right-6 z-50",
-                    "w-[380px] max-w-[calc(100vw-48px)]",
-                    "bg-neutral-900/80 backdrop-blur-[7px] supports-[backdrop-filter]:backdrop-blur-[7px] [-webkit-backdrop-filter:blur(8px)] border-b border-white/10 rounded-[30px] -translate-y-full opacity-0",
-                    "border border-neutral-700/50",
-                    "rounded-2xl overflow-hidden",
-                    "shadow-2xl shadow-black/40",
-                    "transition-all duration-300 ease-out origin-bottom-right",
+                    "fixed bottom-24 right-6 z-50 flex w-[380px] max-w-[calc(100vw-48px)] flex-col overflow-hidden",
+                    "rounded-[28px] border border-white/10 bg-[#0a1626]/60 backdrop-blur-2xl",
+                    "shadow-2xl shadow-black/50 transition-all duration-300 ease-out origin-bottom-right",
                     isOpen
-                        ? "opacity-100 scale-100 translate-y-0"
-                        : "opacity-0 scale-95 translate-y-4 pointer-events-none"
+                        ? "translate-y-0 scale-100 opacity-100"
+                        : "pointer-events-none translate-y-4 scale-95 opacity-0"
                 )}
                 role="dialog"
                 aria-label="Chat Assistant"
                 aria-hidden={!isOpen}
             >
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 py-3 bg-neutral-900/50 border-b border-neutral-700/50">
+                <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-3.5">
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                            <MessageCircle size={16} className="text-white" />
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-700">
+                            <ShieldCheck size={17} className="text-white" />
                         </div>
                         <div>
-                            <h2 className="text-white font-semibold text-sm">Assistant</h2>
-                            <p className="text-neutral-400 text-xs">Abhaya IT Solutions</p>
+                            <h2 className="font-display text-lg leading-none text-white">Assistant</h2>
+                            <p className="mt-1 text-xs text-white/45">{brand.name}</p>
                         </div>
                     </div>
                     <button
                         onClick={() => setIsOpen(false)}
-                        className="p-2 rounded-lg hover:bg-neutral-700/50 transition-colors text-neutral-400 hover:text-white"
+                        className="rounded-lg p-2 text-white/45 transition-colors hover:bg-white/10 hover:text-white"
                         aria-label="Minimize chat"
                     >
                         <Minimize2 size={18} />
                     </button>
                 </div>
 
-                {/* Message Area */}
-                <div className="h-[350px] px-4 py-4 overflow-y-auto flex flex-col gap-3 scrollbar-none">
+                {/* Messages */}
+                <div className="flex h-[360px] flex-col gap-3 overflow-y-auto px-4 py-4 scrollbar-none">
                     {messages.length === 0 ? (
-                        <div className="flex-1 flex items-center justify-center ">
-                            <p className="text-neutral-500 text-sm text-center">
-                                How can we help you today?
-                                <br />
-                                <span className="text-xs text-neutral-600">
-                                    Ask about our services
-                                </span>
-                            </p>
+                        <div className="flex flex-1 flex-col justify-center">
+                            <div className="mb-6 text-center">
+                                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-700/20 ring-1 ring-white/10">
+                                    <Sparkles size={20} className="text-sky-300" />
+                                </div>
+                                <p className="text-sm text-white/80">How can we help today?</p>
+                                <p className="mt-1 text-xs text-white/40">
+                                    Ask about our services or start a project.
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                {SUGGESTIONS.map((s) => (
+                                    <button
+                                        key={s}
+                                        onClick={() => sendMessage(s)}
+                                        className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-left text-sm text-white/70 transition-all hover:border-sky-400/40 hover:bg-white/[0.06] hover:text-white"
+                                    >
+                                        {s}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     ) : (
                         <>
@@ -285,10 +254,10 @@ export default function ChatWidget() {
                                 <div
                                     key={message.id}
                                     className={clsx(
-                                        "max-w-[85%] px-4 py-2.5 rounded-2xl text-sm",
+                                        "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm shadow-lg shadow-black/20",
                                         message.role === "user"
-                                            ? "ml-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-br-sm"
-                                            : "mr-auto bg-neutral-800 text-neutral-100 rounded-bl-sm"
+                                            ? "ml-auto rounded-br-sm bg-gradient-to-br from-sky-500 to-blue-700 text-white"
+                                            : "mr-auto rounded-bl-sm border border-white/15 bg-white/[0.1] backdrop-blur-xl text-white"
                                     )}
                                 >
                                     {message.content ? (
@@ -297,19 +266,19 @@ export default function ChatWidget() {
                                                 components={{
                                                     p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
                                                     strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
-                                                    ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
-                                                    ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
-                                                    li: ({ children }) => <li className="text-neutral-200">{children}</li>,
-                                                    h1: ({ children }) => <h1 className="font-bold text-base mb-2 text-white">{children}</h1>,
-                                                    h2: ({ children }) => <h2 className="font-bold text-sm mb-2 text-white">{children}</h2>,
-                                                    h3: ({ children }) => <h3 className="font-semibold text-sm mb-1 text-white">{children}</h3>,
+                                                    ul: ({ children }) => <ul className="mb-2 list-inside list-disc space-y-1">{children}</ul>,
+                                                    ol: ({ children }) => <ol className="mb-2 list-inside list-decimal space-y-1">{children}</ol>,
+                                                    li: ({ children }) => <li className="text-white/80">{children}</li>,
+                                                    h1: ({ children }) => <h1 className="mb-2 text-base font-bold text-white">{children}</h1>,
+                                                    h2: ({ children }) => <h2 className="mb-2 text-sm font-bold text-white">{children}</h2>,
+                                                    h3: ({ children }) => <h3 className="mb-1 text-sm font-semibold text-white">{children}</h3>,
                                                     a: ({ href, children }) => (
-                                                        <a href={href} className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                                                        <a href={href} className="text-sky-400 hover:underline" target="_blank" rel="noopener noreferrer">
                                                             {children}
                                                         </a>
                                                     ),
                                                     code: ({ children }) => (
-                                                        <code className="bg-neutral-700 px-1.5 py-0.5 rounded text-xs font-mono">
+                                                        <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs">
                                                             {children}
                                                         </code>
                                                     ),
@@ -321,7 +290,7 @@ export default function ChatWidget() {
                                             message.content
                                         )
                                     ) : (
-                                        <span className="inline-flex items-center gap-1 text-neutral-400">
+                                        <span className="inline-flex items-center gap-1.5 text-white/50">
                                             <Loader2 size={14} className="animate-spin" />
                                             Thinking...
                                         </span>
@@ -333,11 +302,8 @@ export default function ChatWidget() {
                     )}
                 </div>
 
-                {/* Input Area */}
-                <form
-                    onSubmit={handleSubmit}
-                    className="px-4 py-3 border-t border-neutral-700/50 bg-neutral-800/30"
-                >
+                {/* Input */}
+                <form onSubmit={handleSubmit} className="border-t border-white/10 bg-white/[0.02] px-4 py-3">
                     <div className="flex items-center gap-2">
                         <input
                             ref={inputRef}
@@ -346,7 +312,7 @@ export default function ChatWidget() {
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyPress}
                             placeholder="Type your message..."
-                            className="flex-1 bg-neutral-700/50 border border-neutral-600/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-700/50 transition-all"
+                            className="flex-1 rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm text-white placeholder-white/35 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-sky-400/60"
                             disabled={isLoading}
                             aria-label="Chat message input"
                         />
@@ -354,56 +320,34 @@ export default function ChatWidget() {
                             type="submit"
                             disabled={isLoading || !input.trim()}
                             className={clsx(
-                                "p-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white transition-all",
+                                "flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-700 text-white transition-all",
                                 isLoading || !input.trim()
-                                    ? "opacity-50 cursor-not-allowed"
-                                    : "hover:opacity-90 hover:scale-105"
+                                    ? "cursor-not-allowed opacity-50"
+                                    : "hover:scale-105 hover:shadow-lg hover:shadow-sky-500/30"
                             )}
                             aria-label="Send message"
                         >
-                            {isLoading ? (
-                                <Loader2 size={18} className="animate-spin" />
-                            ) : (
-                                <Send size={18} />
-                            )}
+                            {isLoading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                         </button>
                     </div>
                 </form>
             </div>
 
-            {/* Floating Chat Button */}
+            {/* Floating button */}
             <button
                 onClick={handleToggleChat}
                 className={clsx(
-                    "fixed bottom-6 right-6 z-50",
-                    "w-14 h-14 rounded-full",
-                    "bg-gradient-to-br from-neutral-700 via-neutral-800 to-neutral-900",
-                    "border border-neutral-600/50",
-                    "flex items-center justify-center",
-                    "shadow-lg shadow-black/30",
-                    "transition-all duration-300 ease-out",
-                    "hover:scale-105 hover:shadow-xl hover:shadow-black/40",
-                    "focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-neutral-900",
-                    "group"
+                    "fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
+                    "bg-gradient-to-br from-sky-500 to-blue-700 shadow-lg shadow-blue-900/40",
+                    "transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-sky-500/40",
+                    "focus:outline-none focus:ring-2 focus:ring-sky-400/60 focus:ring-offset-2 focus:ring-offset-[#08131f]"
                 )}
                 aria-label={isOpen ? "Close chat" : "Open chat assistant"}
                 aria-expanded={isOpen}
                 aria-haspopup="dialog"
             >
-                <div
-                    className={clsx(
-                        "transition-transform duration-300",
-                        isOpen ? "rotate-90" : "rotate-0"
-                    )}
-                >
-                    {isOpen ? (
-                        <X size={24} className="text-white" />
-                    ) : (
-                        <MessageCircle
-                            size={24}
-                            className="text-white group-hover:text-blue-400 transition-colors"
-                        />
-                    )}
+                <div className={clsx("transition-transform duration-300", isOpen ? "rotate-90" : "rotate-0")}>
+                    {isOpen ? <X size={24} className="text-white" /> : <Sparkles size={22} className="text-white" />}
                 </div>
             </button>
         </>

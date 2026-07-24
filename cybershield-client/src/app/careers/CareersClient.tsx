@@ -2,8 +2,8 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { TimelineContent } from '../components/ui/timeline-animations';
-import VerticalCutReveal from '../components/ui/vertical-cut-reveal';
+import { TimelineContent } from '@/components/ui/timeline-animations';
+import PageIntro from '../components/PageIntro/index';
 import {
   Search,
   X,
@@ -13,7 +13,6 @@ import {
   IndianRupee,
   ArrowRight,
   ArrowLeft,
-  Users,
   Sparkles,
   Filter
 } from 'lucide-react';
@@ -312,85 +311,23 @@ const JobsListing = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#000212] text-white overflow-x-hidden">
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative py-20 lg:py-28">
-        {/* Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        </div>
+    <main className="min-h-screen text-white overflow-x-hidden">
+      {/* Full-view intro */}
+      <PageIntro
+        eyebrow="Careers"
+        title={
+          <>
+            Build the future
+            <br />
+            <span className="text-white/50">with us.</span>
+          </>
+        }
+        subtitle="Discover opportunities in IT services, cybersecurity, and web development. Join a team that values innovation, growth, and collaboration."
+      />
 
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_40%,transparent_100%)]" />
-
+      {/* Stats */}
+      <section ref={heroRef} className="relative pt-20">
         <div className="max-w-6xl mx-auto px-4 relative z-10">
-          <TimelineContent
-            animationNum={1}
-            timelineRef={heroRef}
-            customVariants={revealVariants}
-            className="text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Users className="w-4 h-4 text-gray-400" />
-              <span className="text-sm text-gray-400">Join Our Growing Team</span>
-            </div>
-          </TimelineContent>
-
-          <TimelineContent
-            animationNum={2}
-            timelineRef={heroRef}
-            customVariants={revealVariants}
-          >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-center">
-              <VerticalCutReveal
-                splitBy="words"
-                staggerDuration={0.08}
-                staggerFrom="first"
-                reverse={true}
-                containerClassName="justify-center"
-                transition={{
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 35,
-                }}
-              >
-                Build the Future
-              </VerticalCutReveal>
-              <span className="block mt-2">
-                <VerticalCutReveal
-                  splitBy="words"
-                  staggerDuration={0.08}
-                  staggerFrom="first"
-                  reverse={true}
-                  containerClassName="justify-center"
-                  elementLevelClassName="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent"
-                  transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 35,
-                    delay: 0.2,
-                  }}
-                >
-                  With Us
-                </VerticalCutReveal>
-              </span>
-            </h1>
-          </TimelineContent>
-
-          <TimelineContent
-            animationNum={3}
-            timelineRef={heroRef}
-            customVariants={revealVariants}
-            className="text-center"
-          >
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-10">
-              Discover exciting opportunities in IT services, cybersecurity, and web development.
-              Join a team that values innovation, growth, and collaboration.
-            </p>
-          </TimelineContent>
-
-          {/* Stats */}
           <TimelineContent
             animationNum={4}
             timelineRef={heroRef}
@@ -403,8 +340,8 @@ const JobsListing = () => {
               { value: '100%', label: 'Remote Friendly' },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-200">{stat.value}</p>
-                <p className="text-sm text-gray-500">{stat.label}</p>
+                <p className="font-display text-4xl text-white">{stat.value}</p>
+                <p className="text-sm text-white/50">{stat.label}</p>
               </div>
             ))}
           </TimelineContent>

@@ -1,15 +1,15 @@
 import React from "react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const PhotoCard = (
     { imageurl, Title, href, Name, children} : {imageurl:string, Title:string, href:string, Name:string, children?: React.ReactNode;}
 ) => {
   return (
-    <div className="relative flex flex-col h-[100%] w-full items-center p-0 justify-center bg-[#f5f4f3] rounded-3xl">
-        <h1 className="font-cal-sans font-bold m-4 text-xl text-red-500 ">{Title}</h1>
+    <div className="relative flex flex-col h-[100%] w-full items-center p-0 justify-center bg-neutral-900 border border-white/10 rounded-3xl">
+        <h1 className="font-cal-sans font-bold m-4 text-xl text-blue-400 ">{Title}</h1>
       <ClipDiv imgSrc = {imageurl} >
-        <h1 className="font-cal-sans font-bold text-xl text-red-500 bg-black/50 rounded-full p-2 mt-30"><a href={href}>{Name}</a></h1>
+        <h1 className="font-cal-sans font-bold text-xl text-white bg-black/50 rounded-full p-2 mt-30"><a href={href}>{Name}</a></h1>
       </ClipDiv>
 
       {children && <div className="">{children}</div>}

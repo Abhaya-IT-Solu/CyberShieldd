@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { TimelineContent } from "../components/ui/timeline-animations";
-import VerticalCutReveal from "../components/ui/vertical-cut-reveal";
+import { TimelineContent } from "@/components/ui/timeline-animations";
+import VerticalCutReveal from "@/components/ui/vertical-cut-reveal";
 import { motion, AnimatePresence } from "motion/react";
 import {
     Globe,

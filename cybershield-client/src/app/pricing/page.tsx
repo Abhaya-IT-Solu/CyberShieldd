@@ -1,12 +1,7 @@
-import PricingClient from "./PricingClient";
-import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Pricing - Abhaya IT Solutions",
-  description:
-    "Get a quote for our web development services based on your project requirements.",
-};
-
+// Pricing is disconnected from the site for now while the brand is revamped.
+// PricingClient.tsx is kept in place so this can be re-enabled later.
 export default function Pricing() {
-    return <PricingClient />;
+  redirect("/");
 }

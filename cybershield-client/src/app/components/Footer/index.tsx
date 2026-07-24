@@ -1,32 +1,31 @@
 // components/Footer.tsx
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Twitter, Linkedin, Github } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, Phone, MapPin, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
+import { brand } from '@/config/brand';
+
+export const socialIcons = {
+  Twitter,
+  LinkedIn: Linkedin,
+  Instagram,
+  GitHub: Github,
+} as const;
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const services = [
-    { name: 'IT Support', href: '/services#it-support' },
-    { name: 'Penetration Testing', href: '/services#pen-testing' },
-    { name: 'Bug Bounty Programs', href: '/services#bug-bounty' },
-    { name: 'Network Security', href: '/services#network' },
-    { name: 'Website Security', href: '/services#web-security' },
+    { name: 'IT Support', href: '/services' },
+    { name: 'Web Development', href: '/services/webservices' },
+    { name: 'Cybersecurity', href: '/services' },
   ];
 
   const company = [
-    { name: 'About Us', href: '/#about' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Portfolio', href: '/portfolio' },
     { name: 'Blog & Guides', href: '/blog' },
-    { name: 'Testimonials', href: '/#testimonials' },
     { name: 'Careers', href: '/careers' },
-    { name: 'Contact', href: '/#contact' },
-  ];
-
-  const resources = [
-    { name: 'Knowledge Base', href: '/resources' },
-    { name: 'Security Alerts', href: '/security-alerts' },
-    { name: 'Free Tools', href: '/tools' },
-    { name: 'Community Forum', href: '/forum' },
-    { name: 'Newsletter', href: '/newsletter' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const legal = [
@@ -36,46 +35,50 @@ export default function Footer() {
     { name: 'Accessibility', href: '/accessibility' },
   ];
 
-  const socialLinks = [
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/yourhandle' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/cyber-shieldd/' },
-    { name: 'GitHub', icon: Github, href: 'https://github.com/Cyber-Shieldd/' },
-  ];
+  const socialLinks = brand.socials.map((social) => ({
+    name: social.name,
+    href: social.href,
+    icon: socialIcons[social.name as keyof typeof socialIcons] ?? Github,
+  }));
 
   return (
     <footer className="bg-gradient-to-b from-gray-950 to-black text-gray-300 border-t border-gray-800">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Abhaya IT Solutions
-              </span>
+            <Link href="/" aria-label={brand.name} className="mb-5 inline-block">
+              <Image
+                src={brand.logo.mark}
+                alt={brand.name}
+                width={brand.logo.width}
+                height={brand.logo.height}
+                unoptimized
+                className="h-9 w-auto"
+              />
             </Link>
             <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-              Empowering students and small businesses with affordable, accessible cybersecurity solutions. 
-              From basic IT help to advanced penetration testing—secure your digital world.
+              {brand.description}
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                <a href="mailto:support@cybershield.com" className="hover:text-cyan-400 transition-colors">
-                  support@abhayaitsolutions.online
+                <a href={`mailto:${brand.contact.email}`} className="hover:text-cyan-400 transition-colors">
+                  {brand.contact.email}
                 </a>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-cyan-400 transition-colors">
-                  +91-9503705181
+                <a href={`tel:${brand.contact.phone}`} className="hover:text-cyan-400 transition-colors">
+                  {brand.contact.phone}
                 </a>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <MapPin className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                <span>India</span>
+                <span>{brand.contact.location}</span>
               </div>
             </div>
           </div>
@@ -106,25 +109,6 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               {company.map((item) => (
-                <li key={item.name}>
-                  <Link 
-                    href={item.href}
-                    className="text-sm text-gray-400 hover:text-cyan-400 transition-colors inline-block"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources Column */}
-          <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
-              Resources
-            </h3>
-            <ul className="space-y-3">
-              {resources.map((item) => (
                 <li key={item.name}>
                   <Link 
                     href={item.href}
@@ -187,7 +171,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <p className="text-sm text-gray-500">
-              © {currentYear} Abhya IT Solutions. All rights reserved.
+              © {currentYear} {brand.name}. All rights reserved.
             </p>
 
             {/* Social Links */}

@@ -1,5 +1,5 @@
 "use client";
-import { TimelineContent } from "../ui/timeline-animations";
+import { TimelineContent } from "@/components/ui/timeline-animations";
 import Image from "next/image";
 import { useRef } from "react";
 
@@ -25,18 +25,21 @@ function ClientFeedback() {
   
   return (
     <>
-      <section className="relative  h-full container mx-auto m-4  rounded-lg  py-14 bg-white" ref={testimonialRef}>
+      <section className="relative  h-full container mx-auto m-4  rounded-lg  py-14 bg-white/[0.03] border border-white/10 backdrop-blur-sm text-white" ref={testimonialRef}>
         <article className={"max-w-screen-md mx-auto text-center space-y-2 "} >
-          <TimelineContent as="h1" className={"xl:text-4xl text-3xl m-4  font-medium"} animationNum={0} customVariants={revealVariants} timelineRef={testimonialRef}>
-            Trusted by Startups and the worlds's largest companies
+          <TimelineContent as="div" className={"mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/50"} animationNum={0} customVariants={revealVariants} timelineRef={testimonialRef}>
+            Client Feedback
           </TimelineContent>
-          <TimelineContent as="p" className={"mx-auto text-gray-500"} animationNum={1} customVariants={revealVariants} timelineRef={testimonialRef}>
-            Let's hear how Our client's feels about our service
+          <TimelineContent as="h2" className={"font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl"} animationNum={0} customVariants={revealVariants} timelineRef={testimonialRef}>
+            Trusted by the teams we build for.
+          </TimelineContent>
+          <TimelineContent as="p" className={"mx-auto mt-4 max-w-lg text-white/55"} animationNum={1} customVariants={revealVariants} timelineRef={testimonialRef}>
+            What our clients say about working with us.
           </TimelineContent>
         </article>
         <div className="lg:grid lg:grid-cols-3  gap-2 flex flex-col w-full lg:py-10 pt-10 pb-4 lg:px-10 px-4">
           <div className="md:flex lg:flex-col lg:space-y-2 h-full lg:gap-0 gap-2 ">
-            <TimelineContent animationNum={0} customVariants={revealVariants} timelineRef={testimonialRef} className=" lg:flex-[7] flex-[6] flex flex-col justify-between relative bg-primaryColor overflow-hidden rounded-lg border border-gray-200 p-5">
+            <TimelineContent animationNum={0} customVariants={revealVariants} timelineRef={testimonialRef} className=" lg:flex-[7] flex-[6] flex flex-col justify-between relative bg-neutral-900 text-white overflow-hidden rounded-lg border border-white/10 p-5">
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:50px_56px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
               <figure>
                 <Image
@@ -176,7 +179,7 @@ function ClientFeedback() {
                 </div>
               </article>
             </TimelineContent>
-            <TimelineContent animationNum={6} customVariants={revealVariants} timelineRef={testimonialRef} className="lg:flex-[7] flex-[6] flex flex-col justify-between relative bg-primaryColor overflow-hidden rounded-lg border border-gray-200 p-5">
+            <TimelineContent animationNum={6} customVariants={revealVariants} timelineRef={testimonialRef} className="lg:flex-[7] flex-[6] flex flex-col justify-between relative bg-neutral-900 text-white overflow-hidden rounded-lg border border-white/10 p-5">
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:50px_56px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
               <figure>
                 <Image
@@ -208,8 +211,8 @@ function ClientFeedback() {
           </div>
         </div>
 
-        <div className="absolute border-b-2 border-[#e6e6e6] bottom-0 h-16 z-[2] md:w-full w-[90%] md:left-0 left-[5%]">
-          <div className="container mx-auto w-full h-full relative before:absolute before:-left-2 before:-bottom-2 before:w-4 before:h-4 before:bg-white before:shadow-sm before:border border-gray-200 before:border-gray-300 after:absolute after:-right-2 after:-bottom-2 after:w-4 after:h-4 after:bg-white after:shadow-sm after:border after:border-gray-300 "></div>
+        <div className="absolute border-b-2 border-white/10 bottom-0 h-16 z-[2] md:w-full w-[90%] md:left-0 left-[5%]">
+          <div className="container mx-auto w-full h-full relative before:absolute before:-left-2 before:-bottom-2 before:w-4 before:h-4 before:bg-neutral-900 before:shadow-sm before:border border-white/10 before:border-white/10 after:absolute after:-right-2 after:-bottom-2 after:w-4 after:h-4 after:bg-neutral-900 after:shadow-sm after:border after:border-white/10 "></div>
         </div>
       </section>
     </>

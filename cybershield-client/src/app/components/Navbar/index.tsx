@@ -1,96 +1,70 @@
 "use client";
 
-import { useState } from "react";
-import { Drawer } from "vaul";
-import { AlignJustify, X } from "lucide-react";
-import { useMediaQuery } from "../../hooks/use-media-query";
-import clsx from "clsx";
+import Link from "next/link";
 import Image from "next/image";
+import { Home, ShieldCheck, Info, Briefcase, Users, Mail } from "lucide-react";
+import { FloatingDock, type DockItem } from "@/components/ui/floating-dock";
+import { brand, navLinks } from "@/config/brand";
+
+const iconByTitle: Record<string, React.ReactNode> = {
+  Home: <Home className="h-full w-full" />,
+  Services: <ShieldCheck className="h-full w-full" />,
+  About: <Info className="h-full w-full" />,
+  Portfolio: <Briefcase className="h-full w-full" />,
+  Careers: <Users className="h-full w-full" />,
+  Contact: <Mail className="h-full w-full" />,
+};
+
+const dockItems: DockItem[] = navLinks.map((link) => ({
+  title: link.title,
+  href: link.href,
+  icon: iconByTitle[link.title] ?? <Home className="h-full w-full" />,
+}));
+
+// Text links for the top bar (Contact lives in the CTA button).
+const topLinks = navLinks.filter((link) => link.title !== "Contact");
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 992px)");
-
   return (
-    <header
-      className={clsx(
-        "flex gap-2 z-50 text-neutral-900 m-0",
-        "bg-white sm:backdrop-blur-lg sm:border border-gray-200/80 ",
-        "top-2 rounded-lg w-[100%] max-w-7xl  items-center justify-between mx-auto px-4 p-2 sticky"
-      )}
-    >
-      {!isMobile ? (
-        <>
-          <Image
-            src={"/brand/AISlogo.svg"}
-            alt="logo"
-            width={50}
-            height={50}
-          />
+    <>
+      <header className="fixed inset-x-0 top-0 z-50">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-8">
+          <Link href="/" aria-label={brand.name} className="flex items-center">
+            <Image
+              src={brand.logo.mark}
+              alt={brand.name}
+              width={brand.logo.width}
+              height={brand.logo.height}
+              priority
+              unoptimized
+              className="h-9 w-auto"
+            />
+          </Link>
 
-          <nav className="flex gap-7 font-medium">
-            <a href="/">Home</a>
-            <a href="/#services">Services</a>
-            <a href="/#about">About</a>
-            <a href="/#testimonials">Testimonials</a>
-            <a href="/careers">Careers</a>
-            <a href="/pricing">Pricing</a>
+          <nav className="hidden items-center gap-8 md:flex">
+            {topLinks.map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className="text-sm text-white/60 transition-colors hover:text-white"
+              >
+                {link.title}
+              </Link>
+            ))}
           </nav>
 
-          <button className="text-lg h-10 px-4 rounded-lg text-white flex items-center gap-2 bg-neutral-800 relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-gradient-to-t before:from-neutral-800 before:to-neutral-300 before:rounded-t-lg transition-all group">
-           <a href="/#contact">Contact</a> 
-          </button>
-        </>
-      ) : (
-        <Drawer.Root direction="left" open={isOpen} onOpenChange={setIsOpen}>
-          <Drawer.Trigger className="px-2 text-white h-9 grid place-content-center bg-neutral-800 w-fit rounded-lg">
-            <AlignJustify />
-          </Drawer.Trigger>
+          <Link
+            href="/contact"
+            className="liquid-glass rounded-full px-6 py-2.5 text-sm text-white transition-transform hover:scale-[1.03]"
+          >
+            Begin Journey
+          </Link>
+        </div>
+      </header>
 
-          <Drawer.Portal>
-            <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50" />
-            <Drawer.Content
-              className="left-2 top-2 bottom-2 fixed z-50 outline-none w-72 flex"
-              style={
-                {
-                  "--initial-transform": "calc(100% + 8px)",
-                } as React.CSSProperties
-              }
-            >
-              <div className="bg-gradient-to-t from-black via-neutral-800 to-neutral-950 border border-neutral-400 text-white p-2 h-full w-full grow flex flex-col rounded-[16px]">
-                <div className="w-full flex justify-between">
-                  <div className="flex gap-2 px-4 flex-shrink-0 items-center text-2xl font-semibold">
-                    <Image
-                      src={"/brand/AISlogo.svg"}
-                      alt="logo"
-                      width={50}
-                      height={50}
-                    />
-                  </div>
-
-                  <button
-                    className="rounded-md w-fit bg-neutral-800 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-neutral-800"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <X />
-                  </button>
-                </div>
-
-                <div className="rounded-b-md py-2 px-3">
-                  <ul className="space-y-2">
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/">Home</a></li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/#services">Services</a></li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/#about">About</a></li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/#testimonials">Testimonials</a></li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/careers">Careers</a></li>
-                    <li className="hover:bg-neutral-800 cursor-pointer p-1.5 px-2 rounded-md"><a href="/pricing">Pricing</a></li>
-                  </ul>
-                </div>
-              </div>
-            </Drawer.Content>
-          </Drawer.Portal>
-        </Drawer.Root>
-      )}
-    </header>
+      <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4">
+        <FloatingDock items={dockItems} mobileClassName="mb-0" />
+      </div>
+    </>
   );
 }
