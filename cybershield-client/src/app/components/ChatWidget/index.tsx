@@ -336,10 +336,13 @@ export default function ChatWidget() {
             {/* Floating button */}
             <button
                 onClick={handleToggleChat}
+                // Inline background overrides .liquid-glass's near-invisible white/3
+                // fill so the button reads on the dark page while keeping the glass ring.
+                style={{ background: "rgba(90,150,230,0.22)" }}
                 className={clsx(
                     "liquid-glass fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
-                    "shadow-lg shadow-black/40",
-                    "transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-sky-500/30",
+                    "shadow-lg shadow-sky-500/30",
+                    "transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-sky-500/50",
                     "focus:outline-none focus:ring-2 focus:ring-sky-400/60 focus:ring-offset-2 focus:ring-offset-[#08131f]"
                 )}
                 aria-label={isOpen ? "Close chat" : "Open chat assistant"}
