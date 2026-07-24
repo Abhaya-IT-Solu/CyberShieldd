@@ -193,7 +193,7 @@ export default function ChatWidget() {
             <div
                 className={clsx(
                     "fixed bottom-24 right-6 z-50 flex w-[380px] max-w-[calc(100vw-48px)] flex-col overflow-hidden",
-                    "rounded-[28px] border border-white/10 bg-[#0a1626]/60 backdrop-blur-2xl",
+                    "liquid-glass rounded-[28px] border border-white/10 bg-[#0b1a2e]/40 backdrop-blur-2xl",
                     "shadow-2xl shadow-black/50 transition-all duration-300 ease-out origin-bottom-right",
                     isOpen
                         ? "translate-y-0 scale-100 opacity-100"
@@ -320,10 +320,10 @@ export default function ChatWidget() {
                             type="submit"
                             disabled={isLoading || !input.trim()}
                             className={clsx(
-                                "flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-700 text-white transition-all",
+                                "liquid-glass flex h-11 w-11 items-center justify-center rounded-xl text-white transition-all",
                                 isLoading || !input.trim()
                                     ? "cursor-not-allowed opacity-50"
-                                    : "hover:scale-105 hover:shadow-lg hover:shadow-sky-500/30"
+                                    : "hover:scale-105"
                             )}
                             aria-label="Send message"
                         >
@@ -337,9 +337,9 @@ export default function ChatWidget() {
             <button
                 onClick={handleToggleChat}
                 className={clsx(
-                    "fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
-                    "bg-gradient-to-br from-sky-500 to-blue-700 shadow-lg shadow-blue-900/40",
-                    "transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-sky-500/40",
+                    "liquid-glass fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
+                    "shadow-lg shadow-black/40",
+                    "transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-sky-500/30",
                     "focus:outline-none focus:ring-2 focus:ring-sky-400/60 focus:ring-offset-2 focus:ring-offset-[#08131f]"
                 )}
                 aria-label={isOpen ? "Close chat" : "Open chat assistant"}

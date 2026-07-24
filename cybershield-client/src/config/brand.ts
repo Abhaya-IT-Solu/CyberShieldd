@@ -7,9 +7,9 @@ export const brand = {
   shortName: "Gravincy",
   /** Canonical origin — used for metadataBase, sitemap, and robots. */
   siteUrl: "https://abhayaitsolutions.online",
-  tagline: "[Your tagline goes here]",
+  tagline: "Security and software that move enterprises forward.",
   description:
-    "[One to two sentence description of what the company does and who it serves.]",
+    "Gravincy is an enterprise technology partner delivering cybersecurity, software engineering, and managed IT — securing critical systems and shipping resilient software, engineered for scale and hardened for threat.",
   logo: {
     // Intrinsic dimensions of the file — display size is controlled with
     // CSS (e.g. `h-9 w-auto`); these only preserve the aspect ratio.
