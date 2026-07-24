@@ -191,8 +191,11 @@ export default function ChatWidget() {
 
             {/* Chat panel */}
             <div
+                // position:fixed inline — .liquid-glass forces position:relative,
+                // which would otherwise drop this out of fixed positioning.
+                style={{ position: "fixed" }}
                 className={clsx(
-                    "fixed bottom-24 right-6 z-50 flex w-[380px] max-w-[calc(100vw-48px)] flex-col overflow-hidden",
+                    "bottom-24 right-6 z-50 flex w-[380px] max-w-[calc(100vw-48px)] flex-col overflow-hidden",
                     "liquid-glass rounded-[28px] border border-white/10 bg-[#0b1a2e]/40 backdrop-blur-2xl",
                     "shadow-2xl shadow-black/50 transition-all duration-300 ease-out origin-bottom-right",
                     isOpen
@@ -336,11 +339,12 @@ export default function ChatWidget() {
             {/* Floating button */}
             <button
                 onClick={handleToggleChat}
-                // Inline background overrides .liquid-glass's near-invisible white/3
-                // fill so the button reads on the dark page while keeping the glass ring.
-                style={{ background: "rgba(90,150,230,0.22)" }}
+                // Inline styles override .liquid-glass: position:fixed (the class
+                // forces relative) and a visible tinted fill (the class's white/3
+                // is near-invisible on the dark page). Glass ring is preserved.
+                style={{ position: "fixed", background: "rgba(90,150,230,0.22)" }}
                 className={clsx(
-                    "liquid-glass fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
+                    "liquid-glass bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full",
                     "shadow-lg shadow-sky-500/30",
                     "transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-sky-500/50",
                     "focus:outline-none focus:ring-2 focus:ring-sky-400/60 focus:ring-offset-2 focus:ring-offset-[#08131f]"
