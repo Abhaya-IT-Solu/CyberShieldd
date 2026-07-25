@@ -6,7 +6,7 @@ export const brand = {
   name: "Gravincy",
   shortName: "Gravincy",
   /** Canonical origin — used for metadataBase, sitemap, and robots. */
-  siteUrl: "https://abhayaitsolutions.online",
+  siteUrl: "https://gravincy.com",
   tagline: "Security and software that move enterprises forward.",
   description:
     "Gravincy is an enterprise technology partner delivering cybersecurity, software engineering, and managed IT — securing critical systems and shipping resilient software, engineered for scale and hardened for threat.",
